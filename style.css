@@ -1,0 +1,65 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 5vh;
+    width: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff;
+}
+
+header > button {
+    background-color: #111;
+    color: #fff;
+    font-size: .8vw;
+    padding: .2vw .6vw;
+    border-radius: .25vw;
+    margin-left: .8vw;
+}
+
+navButtons {
+    position: fixed;
+    bottom: 1.4vh;
+    left: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+navButtons > button {
+    background-color: #fff;
+    color: #111;
+    font-size: .8vw;
+    padding: .2vw .4vw;
+    border-radius: .25vw;
+    margin-bottom: .6vh;
+}
+
+viewer {
+    background-color: #111;
+    height: 95vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh 2vw;
+    overflow: hidden;
+}
+
+#imageViewer {
+    width: 50%;
+    border: solid 2px #fff;
+}

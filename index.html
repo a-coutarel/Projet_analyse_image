@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#111" />
+    <meta name="description" content="ESIREM TP Analyse d'image">
+    <link href="style.css" rel="stylesheet" />
+    <title>Image Processing</title>
+</head>
+
+<body>
+
+    <header>
+    <button>Gray scale</button>
+    <button>Erosion</button>
+    <button>Dilatation</button>
+    <button>Open</button>
+    <button>Close</button>
+    </header>
+    <navButtons>
+        <button id="zoom-in">Zoom in</button>
+        <button id="zoom-out">Zoom out</button>
+        <button id="rescale">Rescale</button>
+    </navButtons>
+    <viewer>
+        <canvas id="imageViewer"></canvas>
+    </viewer>
+    
+
+    <script src="processing.js"></script>
+</body>
+</html>
