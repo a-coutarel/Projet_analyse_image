@@ -3,12 +3,13 @@ imageObj.crossOrigin = "anonymous";
 imageObj.src = './darth-vader.jpg';
 imageObj.onload = function() { drawImage(this); };
 
+var canvas = document.getElementById('imageViewer');
+var context = canvas.getContext('2d');
+
 /**
  * Draw a canvas fitting perfectly with the image ratio and print the image inside
  */
 function drawImage(img) {
-  var canvas = document.getElementById('imageViewer');
-  var context = canvas.getContext('2d');
   var ratio = img.height / img.width;
   canvas.height = canvas.width * ratio;
   context.drawImage(img, 0,0, canvas.width, canvas.height);
@@ -19,7 +20,6 @@ function drawImage(img) {
  * Increase the size of the canvas
  */
 document.querySelector('#zoom-in').addEventListener("click", () => {
-    var canvas = document.querySelector('#imageViewer');
     var width = canvas.clientWidth;
     canvas.style.width = width + 80 + "px";
 });
@@ -29,7 +29,6 @@ document.querySelector('#zoom-in').addEventListener("click", () => {
  * decrease the size of the canvas
  */
 document.querySelector('#zoom-out').addEventListener("click", () => {
-    var canvas = document.querySelector('#imageViewer');
     var width = canvas.clientWidth;
     canvas.style.width = width - 80 + "px";
 });
@@ -39,7 +38,6 @@ document.querySelector('#zoom-out').addEventListener("click", () => {
  * Replace the canvas at the center of the screen
  */
 document.querySelector('#center').addEventListener("click", () => {
-  var canvas = document.getElementById('imageViewer');
   canvas.style.top = "50%";
   canvas.style.left = "50%";
 });
@@ -49,8 +47,6 @@ document.querySelector('#center').addEventListener("click", () => {
  * Move the canvas with keyboard controls
  */
 document.addEventListener('keydown', (event) => {
-  var canvas = document.getElementById('imageViewer');
-
   if (event.code === 'ArrowUp') {
     canvas.style.top = `${canvas.offsetTop - 80}px`;
   }
@@ -67,3 +63,4 @@ document.addEventListener('keydown', (event) => {
     canvas.style.left = `${canvas.offsetLeft + 80}px`;
   }
 });
+
