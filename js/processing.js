@@ -77,7 +77,6 @@ document.querySelector('#save').addEventListener("click", () => {
  */
 document.querySelector('#openFile').addEventListener("click", () => {
   document.getElementById('getFile').click();
-  document.getElementById('getFile').value = null;
 });
 
 
