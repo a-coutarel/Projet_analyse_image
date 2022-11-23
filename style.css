@@ -27,10 +27,12 @@ header > button {
     padding: .2vw .6vw;
     border-radius: .25vw;
     margin-left: .8vw;
+    border: 0;
 }
 
 navButtons {
     position: fixed;
+    z-index: 1000;
     bottom: 1.4vh;
     left: 1.5vw;
     display: flex;
@@ -45,21 +47,25 @@ navButtons > button {
     padding: .2vw .4vw;
     border-radius: .25vw;
     margin-bottom: .6vh;
+    border: 0;
 }
 
-viewer {
+#viewer {
+    position: relative;
     background-color: #111;
     height: 95vh;
     width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2vh 2vw;
     overflow: hidden;
+
+    background-image: linear-gradient(rgb(109, 109, 109) .1em, transparent .1em), linear-gradient(90deg, rgb(109, 109, 109) .1em, transparent .1em);
+    background-size: 5em 5em;
 }
 
 #imageViewer {
+    position: absolute;
     width: 50%;
-    border: solid 2px #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: top .1s linear, left .1s linear;
 }

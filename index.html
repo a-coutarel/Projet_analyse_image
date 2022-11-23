@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -12,22 +13,25 @@
 <body>
 
     <header>
-    <button>Gray scale</button>
-    <button>Erosion</button>
-    <button>Dilatation</button>
-    <button>Open</button>
-    <button>Close</button>
+        <button>Gray scale</button>
+        <button>Erosion</button>
+        <button>Dilatation</button>
+        <button>Open</button>
+        <button>Close</button>
     </header>
+
     <navButtons>
         <button id="zoom-in">Zoom in</button>
         <button id="zoom-out">Zoom out</button>
-        <button id="rescale">Rescale</button>
+        <button id="center">Center</button>
     </navButtons>
-    <viewer>
+
+    <div id="viewer">
         <canvas id="imageViewer"></canvas>
-    </viewer>
-    
+    </div>
 
     <script src="processing.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
 </body>
 </html>
