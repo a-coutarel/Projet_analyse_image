@@ -1,13 +1,15 @@
-import { ImageObj } from "./imageObj.js";
+import { ImageObj } from "./ImageObj.js";
 
-let imageObj = new ImageObj();
+let canvas = document.getElementById('imageViewer');
+
+let imageObj;
 
 /**
  * Increases the size of the canvas
  */
 document.querySelector('#zoom-in').addEventListener("click", () => {
-    let width = imageObj.canvas.clientWidth;
-    imageObj.canvas.style.width = width + 80 + "px";
+    let width = canvas.clientWidth;
+    canvas.style.width = width + 80 + "px";
 });
 
 
@@ -15,8 +17,8 @@ document.querySelector('#zoom-in').addEventListener("click", () => {
  * decreases the size of the canvas
  */
 document.querySelector('#zoom-out').addEventListener("click", () => {
-    let width = imageObj.canvas.clientWidth;
-    imageObj.canvas.style.width = width - 80 + "px";
+    let width = canvas.clientWidth;
+    canvas.style.width = width - 80 + "px";
 });
 
 
@@ -24,8 +26,8 @@ document.querySelector('#zoom-out').addEventListener("click", () => {
  * Replaces the canvas at the center of the screen
  */
 document.querySelector('#center').addEventListener("click", () => {
-  imageObj.canvas.style.top = "50%";
-  imageObj.canvas.style.left = "50%";
+  canvas.style.top = "50%";
+  canvas.style.left = "50%";
 });
 
 
@@ -34,21 +36,24 @@ document.querySelector('#center').addEventListener("click", () => {
  */
 document.addEventListener('keydown', (event) => {
   if (event.code === 'ArrowUp') {
-    imageObj.canvas.style.top = `${imageObj.canvas.offsetTop - 80}px`;
+    canvas.style.top = `${canvas.offsetTop - 80}px`;
   }
 
   if (event.code === 'ArrowDown') {
-    imageObj.canvas.style.top = `${imageObj.canvas.offsetTop + 80}px`;
+    canvas.style.top = `${canvas.offsetTop + 80}px`;
   }
 
   if (event.code === 'ArrowLeft') {
-    imageObj.canvas.style.left = `${imageObj.canvas.offsetLeft - 80}px`;
+    canvas.style.left = `${canvas.offsetLeft - 80}px`;
   }
 
   if (event.code === 'ArrowRight') {
-    imageObj.canvas.style.left = `${imageObj.canvas.offsetLeft + 80}px`;
+    canvas.style.left = `${canvas.offsetLeft + 80}px`;
   }
 });
+
+
+
 
 
 /**
@@ -63,6 +68,7 @@ document.querySelector('#openFile').addEventListener("click", () => {
  * When an image is chosen, imports it and prints it
  */
 document.querySelector('#getFile').addEventListener("change", () => {
+  imageObj = new ImageObj();
   let files = document.getElementById("getFile").files;
   let fr = new FileReader();
   fr.onload = function () { imageObj.image.src = fr.result; }
@@ -78,7 +84,11 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Restores the original image
  */
  document.querySelector('#reset').addEventListener("click", () => {
-  imageObj.reset();
+  if(imageObj instanceof ImageObj) {
+    let img = imageObj.image;
+    imageObj = new ImageObj();
+    imageObj.reset(img);
+  }
 });
 
 
@@ -86,11 +96,13 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Local download of the image
  */
  document.querySelector('#save').addEventListener("click", () => {
-  const link = document.createElement('a');
-  link.download = 'download.jpeg';
-  link.href = imageObj.canvas.toDataURL();
-  link.click();
-  link.delete;
+  if(imageObj instanceof ImageObj) {
+    const link = document.createElement('a');
+    link.download = 'download.jpeg';
+    link.href = canvas.toDataURL();
+    link.click();
+    link.delete;
+  }
 });
 
 
@@ -111,10 +123,18 @@ document.querySelector('#getFile').addEventListener("change", () => {
 
 
 /**
+ * Inverts the image
+ */
+ document.querySelector('#invert').addEventListener("click", () => {
+  if(imageObj instanceof ImageObj) { imageObj.invert(); }
+});
+
+
+/**
  * Grayscale
  */
  document.querySelector('#grayscale').addEventListener("click", () => {
-  imageObj.grayscale();
+  if(imageObj instanceof ImageObj) { imageObj.grayscale(); }
 });
 
 
@@ -123,12 +143,4 @@ document.querySelector('#getFile').addEventListener("change", () => {
  */
  document.querySelector('#binarise').addEventListener("click", () => {
   
-});
-
-
-/**
- * Inverts the image
- */
-document.querySelector('#invert').addEventListener("click", () => {
-  imageObj.invert();
 });

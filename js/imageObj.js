@@ -62,7 +62,8 @@ export class ImageObj {
     }
 
 
-    reset() {
+    reset(img) {
+        this.image = img;
         this.printImage();
     }
 
