@@ -9,20 +9,23 @@ export class ImageObj {
     red = [];
     green = [];
     blue = [];
-    gray;
+    gray = [];
     imgSize;
+    imgWidth;
+    imgHeight;
+    isGrayscale;
 
     constructor() {
         this.image = new Image();
         this.canvas = document.getElementById('imageViewer');
         this.context = this.canvas.getContext('2d');
+        this.isGrayscale = false;
     }
 
 
     loadImage() {
         this.imageData = this.context.getImageData(0, 0, this.image.width, this.image.height);
         this.data = this.imageData.data;
-        this.gray = [];
 
         let index = 0;
 
@@ -34,6 +37,8 @@ export class ImageObj {
         }
 
         this.imgSize = index;
+        this.imgWidth = this.image.width;
+        this.imgHeight = this.image.height;
     }
 
 
@@ -51,6 +56,12 @@ export class ImageObj {
 
 
     printModifiedImage() {
+        if(this.isGrayscale) {
+            this.red = this.gray;
+            this.green = this.gray;
+            this.blue = this.gray;
+        }
+
         let index = 0;
         for(let i = 0; i < this.data.length; i += 4) {
             this.data[i] = this.red[index];
@@ -58,6 +69,7 @@ export class ImageObj {
             this.data[i + 2] = this.blue[index];
             index++;
         }
+
         this.context.putImageData(this.imageData, 0, 0);
     }
 
@@ -68,13 +80,20 @@ export class ImageObj {
     }
 
 
+    grayscaleCheck() {
+        if(!this.isGrayscale) {
+            alert("The image must be converted to grayscale first.\nPlease use the grayscale function.");
+            return false;
+        }
+        return true;
+    }
+
+
     grayscale() {
         for(let i = 0; i < this.imgSize; i++) {
             this.gray[i] = (this.red[i] + this.green[i] + this.blue[i])/3; 
         }
-        this.red = this.gray;
-        this.green = this.gray;
-        this.blue = this.gray;
+        this.isGrayscale = true;
         this.printModifiedImage();
     }
 
@@ -89,7 +108,3 @@ export class ImageObj {
     }
 
 }
-  
-/*grayScaleCheck() {
-    alert("The image must be grayscale before !");
-}*/
