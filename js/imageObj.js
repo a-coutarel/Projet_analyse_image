@@ -39,6 +39,8 @@ export class ImageObj {
         this.imgSize = index;
         this.imgWidth = this.image.width;
         this.imgHeight = this.image.height;
+        
+        this.isImageGrayscale();
     }
 
 
@@ -119,6 +121,15 @@ export class ImageObj {
             }
         }
         
+    }
+
+    isImageGrayscale() {
+        let flag = true;
+        for(let i = 0; i < this.imgSize; i++) {
+            if( !(this.red[i] == this.green[i] && this.green[i] == this.blue[i]) ) { flag = false; break;}
+        }
+
+        if(flag) { this.grayscale(); }
     }
 
 
