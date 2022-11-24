@@ -56,12 +56,6 @@ export class ImageObj {
 
 
     printModifiedImage() {
-        if(this.isGrayscale) {
-            this.red = this.gray;
-            this.green = this.gray;
-            this.blue = this.gray;
-        }
-
         let index = 0;
         for(let i = 0; i < this.data.length; i += 4) {
             this.data[i] = this.red[index];
@@ -90,11 +84,41 @@ export class ImageObj {
 
 
     grayscale() {
+        let grayArray = []
         for(let i = 0; i < this.imgSize; i++) {
-            this.gray[i] = (this.red[i] + this.green[i] + this.blue[i])/3; 
+            grayArray[i] = (this.red[i] + this.green[i] + this.blue[i])/3; 
         }
+
+        let line = [];
+        let index = 0;
+        for(let i = 0; i < this.imgSize; i++) {
+            
+            if(i%this.imgWidth == 0 && i!=0) {
+                this.gray.push(line);
+                line = [];
+                index = 0;
+            }
+
+            line[index] = grayArray[i];
+            index++;
+        }
+        this.gray.push(line);
+
         this.isGrayscale = true;
+        this.gray2RGB();
         this.printModifiedImage();
+    }
+
+
+    gray2RGB() {
+        for(let i = 0; i < this.imgHeight; i++) {
+            for(let j = 0; j < this.imgWidth; j++) {
+                this.red[i*this.imgWidth + j] = this.gray[i][j];
+                this.green[i*this.imgWidth + j] = this.gray[i][j];
+                this.blue[i*this.imgWidth + j] = this.gray[i][j];
+            }
+        }
+        
     }
 
 
