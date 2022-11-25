@@ -68,6 +68,7 @@ document.querySelector('#openFile').addEventListener("click", () => {
  * When an image is chosen, imports it and prints it
  */
 document.querySelector('#getFile').addEventListener("change", () => {
+  canvas.style.visibility = "visible";
   imageObj = new ImageObj();
   let files = document.getElementById("getFile").files;
   let fr = new FileReader();
