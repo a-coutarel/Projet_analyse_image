@@ -82,6 +82,6 @@ navButtons > button {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: top .1s linear, left .1s linear;
+    transition: top .1s linear, left .1s linear, width .1s linear;
     visibility: hidden;
 }
