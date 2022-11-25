@@ -59,6 +59,7 @@ document.addEventListener('keydown', (event) => {
     
     if (imageObj.old_image != undefined) {
       imageObj = new ImageObj(imageObj.old_image);
+      imageObj.loadImage();
     }
     console.log(imageObj);
   }

@@ -37,7 +37,6 @@ export class ImageObj {
             this.isGrayscale = original.isGrayscale;
             
             this.old_image = original.old_image;
-            this.loadImage();
         } else {
             this.image = new Image();
             this.canvas = document.getElementById('imageViewer');
