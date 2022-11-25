@@ -14,27 +14,38 @@ export class ImageObj {
     imgWidth;
     imgHeight;
     isGrayscale;
+    
+    old_image;
+    
 
-
-    constructor() {
-        this.image = new Image();
-        this.canvas = document.getElementById('imageViewer');
-        this.context = this.canvas.getContext('2d');
-        this.isGrayscale = false;
+    constructor(original) {
+    
+        if(original instanceof ImageObj) {
+            this.image = original.image;
+            this.canvas = original.canvas;
+            this.context = original.context;
+            this.imageData = original.imageData;
+            this.data = original.data;
+    
+            this.red = original.red;
+            this.green = original.green;
+            this.blue = original.blue;
+            this.gray = original.gray;
+            this.imgSize = original.imgSize;
+            this.imgWidth = original.imgWidth;
+            this.imgHeight = original.imgHeight;
+            this.isGrayscale = original.isGrayscale;
+            
+            this.old_image = original.old_image;
+            this.loadImage();
+        } else {
+            this.image = new Image();
+            this.canvas = document.getElementById('imageViewer');
+            this.context = this.canvas.getContext('2d');
+            this.isGrayscale = false;
+        }
     }
 
-
-    /**
-     * Draw a canvas fitting perfectly with the image ratio and print the image inside
-     */
-     printImage() {
-        let width = parseInt(this.image.width);
-        let height = parseInt(this.image.height);
-        this.canvas.width = width;
-        this.canvas.height = height;
-        this.context.drawImage(this.image, 0,0);
-        this.loadImage();
-    }
 
 
     /**
@@ -42,6 +53,13 @@ export class ImageObj {
      * This function is called when an image is loaded
      */
     loadImage() {
+    
+        let width = parseInt(this.image.width);
+        let height = parseInt(this.image.height);
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.context.drawImage(this.image, 0,0);
+        
         this.imageData = this.context.getImageData(0, 0, this.image.width, this.image.height);
         this.data = this.imageData.data;
 
@@ -96,36 +114,11 @@ export class ImageObj {
      */
     reset(img) {
         this.image = img;
-        this.printImage();
+        this.loadImage();
     }
 
 
-    /**
-     * Check if the image is grayscale
-     * @returns true or false
-     */
-    grayscaleCheck() {
-        if(!this.isGrayscale) {
-            alert("The image must be converted to grayscale first.\nPlease use the grayscale function.");
-            return false;
-        }
-        return true;
-    }
 
-
-    /**
-     * Copies the data of the gray 2D array attribute in red, green and blue 1D array attributes
-     * Mendatory before print a graycale image because canvas need 3 1D-arrays (red, green, blue) to draw an image
-     */
-    gray2RGB() {
-        for(let i = 0; i < this.imgHeight; i++) {
-            for(let j = 0; j < this.imgWidth; j++) {
-                this.red[i*this.imgWidth + j] = this.gray[i][j];
-                this.green[i*this.imgWidth + j] = this.gray[i][j];
-                this.blue[i*this.imgWidth + j] = this.gray[i][j];
-            }
-        }
-    }
 
 
     /**

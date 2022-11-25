@@ -1,4 +1,6 @@
 import { ImageObj } from "./ImageObj.js";
+import { Generic } from "./image_processing/generic.js"
+import { Invert } from "./image_processing/invert.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -50,9 +52,17 @@ document.addEventListener('keydown', (event) => {
   if (event.code === 'ArrowRight') {
     canvas.style.left = `${canvas.offsetLeft + 80}px`;
   }
+  
+  if (event.code === 'KeyW' && event.ctrlKey) {
+    console.log(imageObj);
+    console.log("CTRL Z");
+    
+    if (imageObj.old_image != undefined) {
+      imageObj = new ImageObj(imageObj.old_image);
+    }
+    console.log(imageObj);
+  }
 });
-
-
 
 
 
@@ -76,7 +86,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
   fr.readAsDataURL(files[0]);
   
   imageObj.image.crossOrigin = "anonymous";
-  imageObj.image.onload = function() { imageObj.printImage(); };
+  imageObj.image.onload = function() { imageObj.loadImage(); };
   document.getElementById('getFile').value = null;
 });
 
@@ -127,7 +137,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Invert button action
  */
  document.querySelector('#invert').addEventListener("click", () => {
-  if(imageObj instanceof ImageObj) { imageObj.invert(); }
+  new Invert(imageObj).out();
 });
 
 
