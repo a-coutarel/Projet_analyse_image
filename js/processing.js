@@ -8,8 +8,8 @@ let imageObj;
  * Increases the size of the canvas
  */
 document.querySelector('#zoom-in').addEventListener("click", () => {
-    let width = canvas.clientWidth;
-    canvas.style.width = width + 80 + "px";
+    let width = canvas.clientWidth
+    canvas.style.width = Math.floor(width*1.1) + "px";
 });
 
 
@@ -18,7 +18,7 @@ document.querySelector('#zoom-in').addEventListener("click", () => {
  */
 document.querySelector('#zoom-out').addEventListener("click", () => {
     let width = canvas.clientWidth;
-    canvas.style.width = width - 80 + "px";
+    canvas.style.width = Math.floor(width/1.1) + "px";
 });
 
 
