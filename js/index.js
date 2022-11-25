@@ -107,7 +107,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
 
 
 /**
- * Addition of the image and another one
+ * Addition button action
  */
  document.querySelector('#addition').addEventListener("click", () => {
   
@@ -115,7 +115,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
 
 
 /**
- * Substraction of the image and another one
+ * Substraction button action
  */
  document.querySelector('#substraction').addEventListener("click", () => {
   
@@ -123,7 +123,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
 
 
 /**
- * Inverts the image
+ * Invert button action
  */
  document.querySelector('#invert').addEventListener("click", () => {
   if(imageObj instanceof ImageObj) { imageObj.invert(); }
@@ -131,7 +131,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
 
 
 /**
- * Grayscale
+ * Grayscale button action
  */
  document.querySelector('#grayscale').addEventListener("click", () => {
   if(imageObj instanceof ImageObj) { imageObj.grayscale(); }
@@ -139,8 +139,80 @@ document.querySelector('#getFile').addEventListener("change", () => {
 
 
 /**
- * Binarises the image
+ * Binarise button action
  */
  document.querySelector('#binarise').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Treshold button action
+ */
+ document.querySelector('#treshold').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Erosion button action
+ */
+ document.querySelector('#erosion').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Dilatation button action
+ */
+ document.querySelector('#dilatation').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Open button action
+ */
+ document.querySelector('#open').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Close button action
+ */
+ document.querySelector('#close').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Thinning button action
+ */
+ document.querySelector('#thinning').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Thickening button action
+ */
+ document.querySelector('#thickening').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Skeleton-lantuejoul button action
+ */
+ document.querySelector('#skeleton-lantuejoul').addEventListener("click", () => {
+  
+});
+
+
+/**
+ * Skeleton-homotopic-thinning button action
+ */
+ document.querySelector('#skeleton-homotopic-thinning').addEventListener("click", () => {
   
 });
