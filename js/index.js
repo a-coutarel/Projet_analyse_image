@@ -60,7 +60,7 @@ document.addEventListener('keydown', (event) => {
     if (imageObj.old_image.length >= 1) {
       imageObj = new ImageObj(imageObj.old_image.at(-1));
       imageObj.old_image.pop();
-      imageObj.loadImage();
+      imageObj.print();
     }
     console.log(imageObj.old_image);
   }
