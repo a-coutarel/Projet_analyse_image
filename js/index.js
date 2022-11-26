@@ -4,6 +4,8 @@ import { Grayscale } from "./image_processing/grayscale.js";
 import { Erosion } from "./image_processing/erosion.js";
 import { Dilatation } from "./image_processing/dilatation.js";
 import { Binarise } from "./image_processing/binarise.js";
+import { Close } from "./image_processing/close.js";
+import { Open } from "./image_processing/open.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -190,7 +192,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Open button action
  */
  document.querySelector('#open').addEventListener("click", () => {
-  
+  new Open(imageObj).outBinaryProcessing();
 });
 
 
@@ -198,7 +200,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Close button action
  */
  document.querySelector('#close').addEventListener("click", () => {
-  
+  new Close(imageObj).outBinaryProcessing();
 });
 
 
