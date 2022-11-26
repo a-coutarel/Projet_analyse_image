@@ -7,7 +7,6 @@ export class Generic {
     constructor(image) {
         if(image instanceof ImageObj) {
             this.image = image;
-            this.image.old_image.push(new ImageObj(image));
         }
     }
 
@@ -19,6 +18,7 @@ export class Generic {
 
     outRGBProcessing() {
         if(this.image instanceof ImageObj) {
+            this.image.prev_image = new ImageObj(this.image);
             this.processing();
             this.rgbUpdate();
             this.printModifiedImage();
@@ -31,6 +31,7 @@ export class Generic {
     outGrayscaleProcessing() {
         if(this.image instanceof ImageObj) {
             if(this.image.isGrayscale) {
+                this.image.prev_image = new ImageObj(this.image);
                 this.processing();
                 this.grayUpdate();
                 this.printModifiedImage();
@@ -47,6 +48,7 @@ export class Generic {
     outBinaryProcessing() {
         if(this.image instanceof ImageObj) {
             if(this.image.isBinary) {
+                this.image.prev_image = new ImageObj(this.image);
                 this.processing();
                 this.binUpdate();
                 this.printModifiedImage();

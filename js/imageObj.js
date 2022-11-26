@@ -18,8 +18,8 @@ export class ImageObj {
     imgHeight;
     isGrayscale;
     isBinary;
-    
-    old_image = [];
+
+    prev_image;
     
 
     constructor(original) {
@@ -31,17 +31,18 @@ export class ImageObj {
             this.imageData = original.imageData;
             this.data = original.data;
     
-            this.red = original.red;
-            this.green = original.green;
-            this.blue = original.blue;
-            this.gray = original.gray;
+            this.red = JSON.parse(JSON.stringify(original.red));
+            this.green = JSON.parse(JSON.stringify(original.green));
+            this.blue = JSON.parse(JSON.stringify(original.blue));
+            this.gray = JSON.parse(JSON.stringify(original.gray));
+            this.bin = JSON.parse(JSON.stringify(original.bin));
             this.imgSize = original.imgSize;
             this.imgWidth = original.imgWidth;
             this.imgHeight = original.imgHeight;
-            this.isGrayscale = original.isGrayscale;
-            this.isBinary = original.isBinary;
+            this.isGrayscale = JSON.parse(JSON.stringify(original.isGrayscale));
+            this.isBinary = JSON.parse(JSON.stringify(original.isBinary));
 
-            this.old_image = original.old_image;
+            this.prev_image = original.prev_image;
         } else {
             this.image = new Image();
             this.canvas = document.getElementById('imageViewer');

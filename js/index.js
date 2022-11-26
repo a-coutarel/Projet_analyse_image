@@ -10,6 +10,7 @@ import { Open } from "./image_processing/open.js";
 let canvas = document.getElementById('imageViewer');
 
 let imageObj;
+//let images = [];
 
 /**
  * Increases the size of the canvas
@@ -42,32 +43,27 @@ document.querySelector('#center').addEventListener("click", () => {
  * Moves the canvas with keyboard controls
  */
 document.addEventListener('keydown', (event) => {
-  if (event.code === 'ArrowUp') {
+  if (event.code === 'ArrowDown') {
     canvas.style.top = `${canvas.offsetTop - 80}px`;
   }
 
-  if (event.code === 'ArrowDown') {
+  if (event.code === 'ArrowUp') {
     canvas.style.top = `${canvas.offsetTop + 80}px`;
   }
 
-  if (event.code === 'ArrowLeft') {
+  if (event.code === 'ArrowRight') {
     canvas.style.left = `${canvas.offsetLeft - 80}px`;
   }
 
-  if (event.code === 'ArrowRight') {
+  if (event.code === 'ArrowLeft') {
     canvas.style.left = `${canvas.offsetLeft + 80}px`;
   }
   
   if (event.code === 'KeyW' && event.ctrlKey) {
-    console.log(imageObj.old_image);
-    console.log("CTRL Z");
-    
-    if (imageObj.old_image.length >= 1) {
-      imageObj = new ImageObj(imageObj.old_image.at(-1));
-      imageObj.old_image.pop();
+    if (imageObj.prev_image != undefined) {
+      imageObj = imageObj.prev_image;
       imageObj.print();
     }
-    console.log(imageObj.old_image);
   }
 });
 
@@ -152,6 +148,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Grayscale button action
  */
  document.querySelector('#grayscale').addEventListener("click", () => {
+  //images.push(new ImageObj(imageObj));
   new Grayscale(imageObj).outRGBProcessing();
 });
 
