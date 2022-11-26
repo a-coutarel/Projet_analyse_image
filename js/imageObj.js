@@ -9,11 +9,15 @@ export class ImageObj {
     red = [];
     green = [];
     blue = [];
+
     gray = [];
+    bin = [];
+    
     imgSize;
     imgWidth;
     imgHeight;
     isGrayscale;
+    isBinary;
     
     old_image = [];
     
@@ -35,6 +39,7 @@ export class ImageObj {
             this.imgWidth = original.imgWidth;
             this.imgHeight = original.imgHeight;
             this.isGrayscale = original.isGrayscale;
+            this.isBinary = original.isBinary;
 
             this.old_image = original.old_image;
         } else {
@@ -42,6 +47,7 @@ export class ImageObj {
             this.canvas = document.getElementById('imageViewer');
             this.context = this.canvas.getContext('2d');
             this.isGrayscale = false;
+            this.isBinary = false;
         }
     }
 
@@ -75,13 +81,14 @@ export class ImageObj {
         this.imgHeight = this.image.height;
         
         this.isImageGrayscale();
+        this.isImageBinary();
     }
 
 
     /**
-     * Check if the image is grayscale when it's imported. If yes, calls gets the datas of the image in the gray attribute (array) and sets isGrayscale to true
+     * Check if the image is grayscale when it's imported. If yes, gets the datas of the image in the gray attribute (array) and sets isGrayscale to true
      */
-    isImageGrayscale() {
+     isImageGrayscale() {
         let flag = true;
         for(let i = 0; i < this.imgSize; i++) {
             if( !(this.red[i] == this.green[i] && this.green[i] == this.blue[i]) ) { flag = false; break;}
@@ -110,6 +117,38 @@ export class ImageObj {
 
             this.isGrayscale = true;
          }
+    }
+
+
+    /**
+     * Check if the image is binary when it's imported. If yes, gets the datas of the image in the bin attribute (array) and sets isBinary to true
+     */
+     isImageBinary() {
+        if(this.isGrayscale) {
+
+            let flag = true;
+
+            for(let i = 0; i < this.imgHeight; i++) {
+                for(let j = 0; j < this.imgWidth; j++) {
+                    if( this.gray[i][j] != 255 && this.gray[i][j] != 0 )  { 
+                        flag = false; break;
+                    }
+                }
+            }
+            
+            if(flag) { 
+                this.bin = JSON.parse(JSON.stringify(this.gray));
+
+                for(let i = 0; i < this.imgHeight; i++) {
+                    for(let j = 0; j < this.imgWidth; j++) {
+                        this.bin[i][j] = this.gray[i][j] / 255;
+                    }
+                }
+
+                this.isBinary = true;
+             }
+        
+        }
     }
 
 

@@ -1,6 +1,8 @@
 import { ImageObj } from "./ImageObj.js";
 import { Invert } from "./image_processing/invert.js";
 import { Grayscale } from "./image_processing/grayscale.js";
+import { Erosion } from "./image_processing/erosion.js";
+import { Dilatation } from "./image_processing/dilatation.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -171,7 +173,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Erosion button action
  */
  document.querySelector('#erosion').addEventListener("click", () => {
-  
+  new Erosion(imageObj).outBinaryProcessing();
 });
 
 
@@ -179,7 +181,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Dilatation button action
  */
  document.querySelector('#dilatation').addEventListener("click", () => {
-  
+  new Dilatation(imageObj).outBinaryProcessing();
 });
 
 

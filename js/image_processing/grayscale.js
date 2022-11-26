@@ -34,7 +34,7 @@ export class Grayscale extends Generic {
         this.image.gray.push(line);
 
         this.image.isGrayscale = true;
-        this.gray2RGB();
+        this.grayUpdate();
     }
     
 }
