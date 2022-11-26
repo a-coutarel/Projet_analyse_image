@@ -3,6 +3,7 @@ import { Invert } from "./image_processing/invert.js";
 import { Grayscale } from "./image_processing/grayscale.js";
 import { Erosion } from "./image_processing/erosion.js";
 import { Dilatation } from "./image_processing/dilatation.js";
+import { Binarise } from "./image_processing/binarise.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -157,7 +158,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Binarise button action
  */
  document.querySelector('#binarise').addEventListener("click", () => {
-  
+  new Binarise(imageObj).outGrayscaleProcessing();
 });
 
 

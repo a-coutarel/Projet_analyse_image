@@ -167,14 +167,14 @@ export class ImageObj {
      */
      print() {
         let index = 0;
-        for(let i = 0; i < this.image.data.length; i += 4) {
-            this.image.data[i] = this.image.red[index];
-            this.image.data[i + 1] = this.image.green[index];
-            this.image.data[i + 2] = this.image.blue[index];
+        for(let i = 0; i < this.data.length; i += 4) {
+            this.data[i] = this.red[index];
+            this.data[i + 1] = this.green[index];
+            this.data[i + 2] = this.blue[index];
             index++;
         }
 
-        this.image.context.putImageData(this.image.imageData, 0, 0);
+        this.context.putImageData(this.imageData, 0, 0);
     }
 
 }
