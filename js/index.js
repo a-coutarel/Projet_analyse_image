@@ -1,6 +1,6 @@
 import { ImageObj } from "./ImageObj.js";
-import { Generic } from "./image_processing/generic.js"
 import { Invert } from "./image_processing/invert.js";
+import { Grayscale } from "./image_processing/grayscale.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -54,14 +54,15 @@ document.addEventListener('keydown', (event) => {
   }
   
   if (event.code === 'KeyW' && event.ctrlKey) {
-    console.log(imageObj);
+    console.log(imageObj.old_image);
     console.log("CTRL Z");
     
-    if (imageObj.old_image != undefined) {
-      imageObj = new ImageObj(imageObj.old_image);
+    if (imageObj.old_image.length >= 1) {
+      imageObj = new ImageObj(imageObj.old_image.at(-1));
+      imageObj.old_image.pop();
       imageObj.loadImage();
     }
-    console.log(imageObj);
+    console.log(imageObj.old_image);
   }
 });
 
@@ -138,7 +139,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Invert button action
  */
  document.querySelector('#invert').addEventListener("click", () => {
-  new Invert(imageObj).out();
+  new Invert(imageObj).outRGBProcessing();
 });
 
 
@@ -146,7 +147,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Grayscale button action
  */
  document.querySelector('#grayscale').addEventListener("click", () => {
-  if(imageObj instanceof ImageObj) { imageObj.grayscale(); }
+  new Grayscale(imageObj).outRGBProcessing();
 });
 
 
