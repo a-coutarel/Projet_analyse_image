@@ -59,10 +59,8 @@ export class ImageObj {
      */
     loadImage() {
     
-        let width = parseInt(this.image.width);
-        let height = parseInt(this.image.height);
-        this.canvas.width = width;
-        this.canvas.height = height;
+        this.canvas.width = parseInt(this.image.width);
+        this.canvas.height = parseInt(this.image.height);
         this.context.drawImage(this.image, 0,0);
         
         this.imageData = this.context.getImageData(0, 0, this.image.width, this.image.height);

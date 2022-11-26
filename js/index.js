@@ -6,6 +6,8 @@ import { Dilatation } from "./image_processing/dilatation.js";
 import { Binarise } from "./image_processing/binarise.js";
 import { Close } from "./image_processing/close.js";
 import { Open } from "./image_processing/open.js";
+import { Addition } from "./image_processing/addition.js";
+import { Substraction } from "./image_processing/substraction.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -124,7 +126,22 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Addition button action
  */
  document.querySelector('#addition').addEventListener("click", () => {
+  if(imageObj != undefined)
+    document.getElementById('getFileAddition').click();
+  else
+    alert("Please open a file first.")
+});
+
+
+document.querySelector('#getFileAddition').addEventListener("change", () => {
+  let second_imageObj = new ImageObj();
+  let files = document.getElementById("getFileAddition").files;
+  let fr = new FileReader();
+  fr.onload = function () { second_imageObj.image.src = fr.result; }
+  fr.readAsDataURL(files[0]);
   
+  second_imageObj.image.onload = function() { new Addition(imageObj, second_imageObj).outRGBProcessing(); };
+  document.getElementById('getFileAddition').value = null;
 });
 
 
@@ -132,7 +149,22 @@ document.querySelector('#getFile').addEventListener("change", () => {
  * Substraction button action
  */
  document.querySelector('#substraction').addEventListener("click", () => {
+  if(imageObj != undefined)
+    document.getElementById('getFileSubstraction').click();
+  else
+    alert("Please open a file first.")
+});
+
+
+document.querySelector('#getFileSubstraction').addEventListener("change", () => {
+  let second_imageObj = new ImageObj();
+  let files = document.getElementById("getFileSubstraction").files;
+  let fr = new FileReader();
+  fr.onload = function () { second_imageObj.image.src = fr.result; }
+  fr.readAsDataURL(files[0]);
   
+  second_imageObj.image.onload = function() { new Substraction(imageObj, second_imageObj).outRGBProcessing(); };
+  document.getElementById('getFileSubstraction').value = null;
 });
 
 
