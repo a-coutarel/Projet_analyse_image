@@ -13,7 +13,6 @@ import { Threshold } from "./image_processing/threshold.js";
 let canvas = document.getElementById('imageViewer');
 
 let imageObj;
-//let images = [];
 
 /**
  * Increases the size of the canvas
