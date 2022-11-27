@@ -98,6 +98,18 @@ document.querySelector('#getFile').addEventListener("change", () => {
 
 
 /**
+ * Delete the image instance and hide the canvas
+ */
+ document.querySelector('#clear').addEventListener("click", () => {
+  if(imageObj instanceof ImageObj) {
+    imageObj = undefined;
+    canvas.style.visibility = "hidden";
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+  }
+});
+
+
+/**
  * Restores the original image
  */
  document.querySelector('#reset').addEventListener("click", () => {
