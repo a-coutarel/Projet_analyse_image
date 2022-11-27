@@ -8,6 +8,7 @@ import { Close } from "./image_processing/close.js";
 import { Open } from "./image_processing/open.js";
 import { Addition } from "./image_processing/addition.js";
 import { Substraction } from "./image_processing/substraction.js";
+import { Threshold } from "./image_processing/threshold.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -177,6 +178,14 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
 
 
 /**
+ * Treshold button action
+ */
+ document.querySelector('#treshold').addEventListener("click", () => {
+  new Threshold(imageObj).outRGBProcessing();
+});
+
+
+/**
  * Grayscale button action
  */
  document.querySelector('#grayscale').addEventListener("click", () => {
@@ -190,14 +199,6 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
  */
  document.querySelector('#binarise').addEventListener("click", () => {
   new Binarise(imageObj).outGrayscaleProcessing();
-});
-
-
-/**
- * Treshold button action
- */
- document.querySelector('#treshold').addEventListener("click", () => {
-  
 });
 
 
