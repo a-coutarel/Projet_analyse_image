@@ -63,7 +63,7 @@ document.addEventListener('keydown', (event) => {
   }
   
   if (event.code === 'KeyW' && event.ctrlKey) {
-    if (imageObj.prev_image != undefined) {
+    if (imageObj != undefined && imageObj.prev_image != undefined) {
       imageObj = imageObj.prev_image;
       imageObj.print();
     }
@@ -85,6 +85,7 @@ document.querySelector('#openFile').addEventListener("click", () => {
  */
 document.querySelector('#getFile').addEventListener("change", () => {
   canvas.style.visibility = "visible";
+  canvas.style.setProperty('width', 'calc(30% + 300px)');
   imageObj = new ImageObj();
   let files = document.getElementById("getFile").files;
   let fr = new FileReader();
@@ -104,6 +105,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
   if(imageObj instanceof ImageObj) {
     imageObj = undefined;
     canvas.style.visibility = "hidden";
+    canvas.style.setProperty('width', 'calc(30% + 300px)');
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
   }
 });
