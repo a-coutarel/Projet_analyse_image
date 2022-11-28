@@ -20,11 +20,15 @@ export class Close extends Generic {
             size = parseFloat(size);
             
             if(size >= 1 && size <= this.image.imgWidth && size <= this.image.imgHeight && size%2 == 1) {
-                new Dilatation(this.image).doDilatation(size);
-                new Erosion(this.image).doErosion(size);
+                this.doClose(size);
             } 
             else alert("Please enter a positive and odd number.");    
         }
+    }
+
+    doClose(size) {
+        new Dilatation(this.image).doDilatation(size);
+        new Erosion(this.image).doErosion(size);
     }
     
 }
