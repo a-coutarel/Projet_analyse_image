@@ -13,8 +13,18 @@ export class Close extends Generic {
      * Close
      */
     processing() {
-        new Dilatation(this.image).processing();
-        new Erosion(this.image).processing();
+        let size = prompt("Please enter the size of the structuring element :", "3");
+
+        if (!(size == null || size == "") && !isNaN(size)) {
+            
+            size = parseFloat(size);
+            
+            if(size >= 1 && size <= this.image.imgWidth && size <= this.image.imgHeight && size%2 == 1) {
+                new Dilatation(this.image).doDilatation(size);
+                new Erosion(this.image).doErosion(size);
+            } 
+            else alert("Please enter a positive and odd number.");    
+        }
     }
     
 }

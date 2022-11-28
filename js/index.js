@@ -128,7 +128,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
  document.querySelector('#save').addEventListener("click", () => {
   if(imageObj instanceof ImageObj) {
     const link = document.createElement('a');
-    link.download = 'download.jpeg';
+    link.download = 'download.png';
     link.href = canvas.toDataURL();
     link.click();
     link.delete;

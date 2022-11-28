@@ -11,17 +11,32 @@ export class Erosion extends Generic {
      * Erosion
      */
     processing() {
+        let size = prompt("Please enter the size of the structuring element :", "3");
+
+        if (!(size == null || size == "") && !isNaN(size)) {
+            
+            size = parseFloat(size);
+            
+            if(size >= 1 && size <= this.image.imgWidth && size <= this.image.imgHeight && size%2 == 1) {
+                this.doErosion(size);
+            } 
+            else alert("Please enter a positive and odd number.");    
+        }
+    }
+
+    doErosion(size) {
         let somme;
+        let bound = Math.floor(size / 2);
         let bin_copy = JSON.parse(JSON.stringify(this.image.bin));
-        for(let i = 1; i < this.image.imgHeight-1; i++) {
-            for(let j = 1; j < this.image.imgWidth-1; j++) {
+        for(let i = bound; i < this.image.imgHeight-bound; i++) {
+            for(let j = bound; j < this.image.imgWidth-bound; j++) {
                 somme = 0;
-                for(let k = -1; k <= 1; k++) {
-                    for(let l = -1; l <= 1; l++) {
+                for(let k = -bound; k <= bound; k++) {
+                    for(let l = -bound; l <= bound; l++) {
                         somme += bin_copy[i+k][j+l];
                     }
                 }
-                if(somme != 9) { this.image.bin[i][j] = 0; }
+                if(somme != (size*size)) { this.image.bin[i][j] = 0; }
             }
         }
     }
