@@ -268,6 +268,14 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
 
 
 /**
+ * Skeleton-homotopic-thinning button action
+ */
+ document.querySelector('#skeleton-homotopic-thinning').addEventListener("click", () => {
+  new HomotopicThickening(imageObj).outBinaryProcessing();
+});
+
+
+/**
  * Skeleton-lantuejoul button action
  */
  document.querySelector('#skeleton-lantuejoul').addEventListener("click", () => {
@@ -275,9 +283,14 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
 });
 
 
-/**
- * Skeleton-homotopic-thinning button action
- */
- document.querySelector('#skeleton-homotopic-thinning').addEventListener("click", () => {
-  new HomotopicThickening(imageObj).outBinaryProcessing();
+document.querySelector('.thinning-btninfo').addEventListener("click", () => {
+  let img = document.getElementsByClassName("SE-details")[0];
+  if(img.style.display == 'none' || img.style.display == '') img.style.display = 'block';
+  else img.style.display = 'none';
+});
+
+document.querySelector('.thickening-btninfo').addEventListener("click", () => {
+  let img = document.getElementsByClassName("SE-details")[1];
+  if(img.style.display == 'none' || img.style.display == '') img.style.display = 'block';
+  else img.style.display = 'none';
 });

@@ -15,18 +15,14 @@ export class HomotopicThickening extends Generic {
 
         let loop = 0;
         let idempotence = false;
-        let count = 1;
         let prev_bin = JSON.parse(JSON.stringify(this.image.bin));
 
         do {
             new Thinning(this.image).doThinning(loop%8 + 1);
-            idempotence = this.idempotence(prev_bin);
-            if(count == 8) {
+            if(loop%8 + 1 == 8) {
                 idempotence = this.idempotence(prev_bin);
-                count = 0;
                 if(!idempotence) prev_bin = JSON.parse(JSON.stringify(this.image.bin));
             }
-            count++;
             loop++;
         } while(!idempotence)
     }

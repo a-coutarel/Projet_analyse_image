@@ -85,3 +85,19 @@ navButtons > button {
     transition: top .1s linear, left .1s linear, width .1s linear;
     visibility: hidden;
 }
+
+.SE-details {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    z-index: 2000;
+    box-shadow: rgb(0, 0, 0) 0px 0px 30px 0px;
+}
+
+.help {
+    margin-left: 0;
+    padding: .1vw .2vw .1vw 0vw;
+}

@@ -33,9 +33,11 @@
         <button id="open">Open</button>
         <button id="close">Close</button>
         <button id="thinning">Thinning</button>
+        <button class="thinning-btninfo help">ⓘ</button>
         <button id="thickening">Thickening</button>
-        <button id="skeleton-lantuejoul">Skeleton : Lantuejoul</button>
+        <button class="thickening-btninfo help">ⓘ</button>
         <button id="skeleton-homotopic-thinning">Skeleton : homotopic thinning</button>
+        <button id="skeleton-lantuejoul">Skeleton : Lantuejoul</button>
     </header>
 
     <navButtons>
@@ -47,6 +49,9 @@
     <div id="viewer">
         <canvas id="imageViewer"></canvas>
     </div>
+
+    <img class="SE-details" src="./utils/thinning_SE.png"/>
+    <img class="SE-details" src="./utils/thickening_SE.png"/>
 
     <script type="module" src="./js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
