@@ -133,5 +133,23 @@ export class Generic {
             }
         }
     }
+
+
+    /**
+     * Check equality of the binary datas of the image and the binary datas in parameter to check the idempotence
+     * @param {*} prev_bin 
+     * @returns 
+     */
+    idempotence(prev_bin) {
+        let flag = true;
+
+        for(let i = 0; i < this.image.imgHeight; i++) {
+            for(let j = 0; j < this.image.imgWidth; j++) {
+                if(prev_bin[i][j] != this.image.bin[i][j]) {flag = false;}
+            }
+        }
+
+        return flag;
+    }
     
 }

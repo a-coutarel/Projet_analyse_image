@@ -27,16 +27,4 @@ export class HomotopicThickening extends Generic {
         } while(!idempotence)
     }
 
-    idempotence(prev_bin) {
-        let flag = true;
-
-        for(let i = 0; i < this.image.imgHeight; i++) {
-            for(let j = 0; j < this.image.imgWidth; j++) {
-                if(prev_bin[i][j] != this.image.bin[i][j]) {flag = false;}
-            }
-        }
-
-        return flag;
-    }
-    
 }
