@@ -9,6 +9,10 @@ import { Open } from "./image_processing/open.js";
 import { Addition } from "./image_processing/addition.js";
 import { Substraction } from "./image_processing/substraction.js";
 import { Threshold } from "./image_processing/threshold.js";
+import { Lantuejoul } from "./image_processing/lantuejoul.js";
+import { Thinning } from "./image_processing/thinning.js";
+import { Thickening } from "./image_processing/thickening.js";
+import { HomotopicThickening } from "./image_processing/homotopic_thinning.js";
 
 let canvas = document.getElementById('imageViewer');
 
@@ -251,7 +255,7 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
  * Thinning button action
  */
  document.querySelector('#thinning').addEventListener("click", () => {
-  
+  new Thinning(imageObj).outBinaryProcessing();
 });
 
 
@@ -259,7 +263,7 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
  * Thickening button action
  */
  document.querySelector('#thickening').addEventListener("click", () => {
-  
+  new Thickening(imageObj).outBinaryProcessing();
 });
 
 
@@ -267,7 +271,7 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
  * Skeleton-lantuejoul button action
  */
  document.querySelector('#skeleton-lantuejoul').addEventListener("click", () => {
-  
+  new Lantuejoul(imageObj).outBinaryProcessing();
 });
 
 
@@ -275,5 +279,5 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
  * Skeleton-homotopic-thinning button action
  */
  document.querySelector('#skeleton-homotopic-thinning').addEventListener("click", () => {
-  
+  new HomotopicThickening(imageObj).outBinaryProcessing();
 });
