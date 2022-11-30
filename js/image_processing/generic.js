@@ -10,7 +10,9 @@ export class Generic {
         }
     }
 
-
+    /**
+     * algorithm method
+     */
     processing() {
         throw "This method must be redefined !";
     }
@@ -63,7 +65,7 @@ export class Generic {
 
 
     /**
-     * Print the image from data
+     * Prints the image from data
      */
      printModifiedImage() {
         let index = 0;
@@ -75,6 +77,7 @@ export class Generic {
         }
 
         this.image.context.putImageData(this.image.imageData, 0, 0);
+        this.image.calcHisto();
     }
     
 
@@ -136,7 +139,7 @@ export class Generic {
 
 
     /**
-     * Check equality of the binary datas of the image and the binary datas in parameter to check the idempotence
+     * Checks equality of the binary datas of the image and the binary datas in parameter to check the idempotence
      * @param {*} prev_bin 
      * @returns 
      */

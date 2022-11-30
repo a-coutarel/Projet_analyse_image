@@ -14,9 +14,50 @@ import { Thinning } from "./image_processing/thinning.js";
 import { Thickening } from "./image_processing/thickening.js";
 import { HomotopicThickening } from "./image_processing/homotopic_thinning.js";
 
+
 let canvas = document.getElementById('imageViewer');
 
 let imageObj;
+
+
+const histogram = document.getElementById('histogram');
+let dataImg = [];
+let X = [];
+for(let i = 0; i <= 255; i++) {
+    X[i] = i;
+    dataImg[i] = 0;
+}
+
+let chartHisto = new Chart(histogram, {
+    type: 'bar',
+    data: {
+      labels: X,
+      datasets: [{
+        label: 'Histogram',
+        data: dataImg,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Intensity'
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Number of pixels'
+          },
+          beginAtZero: true,
+        }
+      }
+    }
+  });
+
+
 
 /**
  * Increases the size of the canvas
@@ -90,6 +131,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
   canvas.style.visibility = "visible";
   canvas.style.setProperty('width', 'calc(30% + 300px)');
   imageObj = new ImageObj();
+  imageObj.setChart(chartHisto);
   let files = document.getElementById("getFile").files;
   let fr = new FileReader();
   fr.onload = function () { imageObj.image.src = fr.result; }
@@ -111,6 +153,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
     canvas.style.setProperty('width', 'calc(30% + 300px)');
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
   }
+  document.getElementById('close-histo').click();
 });
 
 
@@ -121,6 +164,7 @@ document.querySelector('#getFile').addEventListener("change", () => {
   if(imageObj instanceof ImageObj) {
     let img = imageObj.image;
     imageObj = new ImageObj();
+    imageObj.setChart(chartHisto);
     imageObj.reset(img);
   }
 });
@@ -283,6 +327,10 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
 });
 
 
+
+/**
+ * Shows picture of details of the structuring element for thinning when click on the thinning info btn
+ */
 document.querySelector('.thinning-btninfo').addEventListener("click", () => {
   let img = document.getElementsByClassName("SE-details")[0];
   if(img.style.height == '0px' || img.style.height == '') {
@@ -297,6 +345,9 @@ document.querySelector('.thinning-btninfo').addEventListener("click", () => {
   }
 });
 
+/**
+ * Shows picture of details of the structuring element for thickening when click on the thickening info btn
+ */
 document.querySelector('.thickening-btninfo').addEventListener("click", () => {
   let img = document.getElementsByClassName("SE-details")[1];
   if(img.style.height == '0px' || img.style.height == '') {
@@ -309,4 +360,47 @@ document.querySelector('.thickening-btninfo').addEventListener("click", () => {
     setTimeout( () => { img.style.height = '0px' }, 150);
     document.querySelector('.thickening-btninfo').innerText = "ⓘ"; 
   }
+});
+
+
+
+/**
+ * Shows the histogram window
+ */
+document.querySelector('#show-histo').addEventListener("click", () => {
+  if(imageObj instanceof ImageObj && imageObj.isGrayscale) {
+    histogram.style.visibility = "visible";
+    histogram.style.opacity = "1";
+  }
+  else {
+    document.querySelector('#histo-alert').style.visibility = "visible";
+    document.querySelector('#histo-alert').style.opacity = "1";
+  }
+
+  document.querySelector('#show-histo').style.visibility = "hidden";
+  document.querySelector('#close-histo').style.visibility = "visible";
+  document.querySelector('#histo-container').style.visibility = "visible";
+
+  document.querySelector('#show-histo').style.opacity = "0";
+  document.querySelector('#close-histo').style.opacity = "1";
+  document.querySelector('#histo-container').style.backgroundColor = "#fff";
+});
+
+
+/**
+ * Closes the histogram window
+ */
+document.querySelector('#close-histo').addEventListener("click", () => {
+  histogram.style.visibility = "hidden";
+  histogram.style.opacity = "0";
+  document.querySelector('#histo-alert').style.visibility = "hidden";
+  document.querySelector('#histo-alert').style.opacity = "0";
+  
+  document.querySelector('#show-histo').style.visibility = "visible";
+  document.querySelector('#close-histo').style.visibility = "hidden";
+  document.querySelector('#histo-container').style.visibility = "hidden";
+
+  document.querySelector('#show-histo').style.opacity = "1";
+  document.querySelector('#close-histo').style.opacity = "0";
+  document.querySelector('#histo-container').style.backgroundColor = "transparent";
 });

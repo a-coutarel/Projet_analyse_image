@@ -20,7 +20,8 @@ export class ImageObj {
     isBinary;
 
     prev_image;
-    
+
+    chartHisto;
 
     constructor(original) {
     
@@ -43,6 +44,7 @@ export class ImageObj {
             this.isBinary = JSON.parse(JSON.stringify(original.isBinary));
 
             this.prev_image = original.prev_image;
+            this.chartHisto = original.chartHisto;
         } else {
             this.image = new Image();
             this.canvas = document.getElementById('imageViewer');
@@ -81,11 +83,21 @@ export class ImageObj {
         
         this.isImageGrayscale();
         this.isImageBinary();
+        this.calcHisto();
     }
 
 
     /**
-     * Check if the image is grayscale when it's imported. If yes, gets the datas of the image in the gray attribute (array) and sets isGrayscale to true
+     * Initialises the chart attribute with the parameter
+     * @param {*} chart 
+     */
+    setChart(chart) {
+        this.chartHisto = chart;
+    }
+
+
+    /**
+     * Checks if the image is grayscale when it's imported. If yes, gets the datas of the image in the gray attribute (array) and sets isGrayscale to true
      */
      isImageGrayscale() {
         let flag = true;
@@ -120,7 +132,7 @@ export class ImageObj {
 
 
     /**
-     * Check if the image is binary when it's imported. If yes, gets the datas of the image in the bin attribute (array) and sets isBinary to true
+     * Checks if the image is binary when it's imported. If yes, gets the datas of the image in the bin attribute (array) and sets isBinary to true
      */
      isImageBinary() {
         if(this.isGrayscale) {
@@ -162,7 +174,7 @@ export class ImageObj {
 
 
     /**
-     * Print the image from data
+     * Prints the image from data
      */
      print() {
         let index = 0;
@@ -174,6 +186,47 @@ export class ImageObj {
         }
 
         this.context.putImageData(this.imageData, 0, 0);
+        this.calcHisto();
+    }
+
+    
+    /**
+     * Calculates the histogram and updates it
+     */
+    calcHisto() {
+        if(this.isGrayscale) {
+
+            let dataImg = [];
+
+            for(let i = 0; i <= 255; i++) {
+                dataImg[i] = 0;
+            }
+
+            for(let i = 0; i < this.imgHeight; i++) {
+                for(let j = 0; j < this.imgWidth; j++) {
+                    dataImg[this.gray[i][j]]++;
+                }
+            }
+
+            this.chartHisto.data.datasets[0].data = dataImg;
+            if(document.getElementById('histo-container').style.visibility == "visible") {
+                document.getElementById('histogram').style.visibility = "visible";
+                document.getElementById('histogram').style.opacity = "1";
+                document.querySelector('#histo-alert').style.visibility = "hidden";
+                document.querySelector('#histo-alert').style.opacity = "0";
+            }
+            this.chartHisto.options = { scales: { y: { max : Math.max(...dataImg) } }};
+            this.chartHisto.update();
+            
+        
+        } else {
+            if(document.getElementById('histo-container').style.visibility == "visible") {
+                document.querySelector('#histo-alert').style.visibility = "visible";
+                document.querySelector('#histo-alert').style.opacity = "1";
+                document.getElementById('histogram').style.visibility = "hidden";
+                document.getElementById('histogram').style.opacity = "0";
+            }
+        }
     }
 
 }

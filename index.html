@@ -46,6 +46,13 @@
         <button id="center">Center</button>
     </navButtons>
 
+    <div id="histo-container">
+        <button id="show-histo">Show Histogram</button>
+        <button id="close-histo">X</button>
+        <p id="histo-alert">Impossible to show the histogram<br>Please use a grayscale image</p>
+        <canvas id="histogram"></canvas>
+    </div>
+    
     <div id="viewer">
         <canvas id="imageViewer"></canvas>
     </div>
@@ -55,6 +62,7 @@
 
     <script type="module" src="./js/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="./js/package/dist/chart.umd.js"></script>
 
 </body>
 </html>
