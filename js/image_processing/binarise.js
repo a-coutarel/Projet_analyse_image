@@ -12,7 +12,7 @@ export class Binarise extends Generic {
      */
     processing() {
         let threshold;
-        if (confirm("Press ok for automatic binarization or cancel to choose the threshold") == true) {
+        if (confirm("Press ok for automatic binarization or cancel to choose the threshold.") == true) {
             let sum = 0;
             for(let i = 0; i < this.image.imgHeight; i++) {
                 for(let j = 0; j < this.image.imgWidth; j++) {

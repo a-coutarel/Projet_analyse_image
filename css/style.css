@@ -87,7 +87,7 @@ navButtons > button {
 }
 
 .SE-details {
-    display: none;
+    height: 0px;
     position: fixed;
     left: 50%;
     top: 50%;
@@ -95,6 +95,8 @@ navButtons > button {
     width: 40%;
     z-index: 2000;
     box-shadow: rgb(0, 0, 0) 0px 0px 30px 0px;
+    transition: opacity .1s linear;
+    opacity: 0;
 }
 
 .help {
