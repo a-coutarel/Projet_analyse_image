@@ -154,6 +154,9 @@ document.querySelector('#getFile').addEventListener("change", () => {
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
   }
   document.getElementById('close-histo').click();
+  document.getElementById('center').click();
+  document.querySelector('#histo-container').style.left = 73.5 + "vw";
+  document.querySelector('#histo-container').style.top = 71.35 + "vh";
 });
 
 
@@ -404,3 +407,64 @@ document.querySelector('#close-histo').addEventListener("click", () => {
   document.querySelector('#close-histo').style.opacity = "0";
   document.querySelector('#histo-container').style.background = "transparent";
 });
+
+
+let mousePositionHisto;
+let offsetHisto = [0,0];
+let isDownHisto = false;
+
+document.querySelector('#histo-container').addEventListener('mousedown', function(e) {
+  isDownHisto = true;
+  offsetHisto = [
+      document.querySelector('#histo-container').offsetLeft - e.clientX,
+      document.querySelector('#histo-container').offsetTop - e.clientY
+    ];
+}, true);
+
+document.addEventListener('mousemove', function(event) {
+    event.preventDefault();
+    if (isDownHisto) {
+      mousePositionHisto = {
+    
+            x : event.clientX,
+            y : event.clientY
+    
+        };
+        document.querySelector('#histo-container').style.left = (mousePositionHisto.x + offsetHisto[0]) + 'px';
+        document.querySelector('#histo-container').style.top  = (mousePositionHisto.y + offsetHisto[1]) + 'px';
+    }
+}, true);
+
+
+document.addEventListener('mouseup', function() {
+  isDownHisto = false;
+  isDownCanvas = false;
+}, true);
+
+
+let mousePositionCanvas;
+let offsetCanvas = [0,0];
+let isDownCanvas = false;
+
+canvas.addEventListener('mousedown', function(e) {
+  isDownCanvas = true;
+  offsetCanvas = [
+    canvas.offsetLeft - e.clientX,
+    canvas.offsetTop - e.clientY
+  ];
+}, true);
+
+document.addEventListener('mousemove', function(event) {
+  event.preventDefault();
+  if (isDownCanvas) {
+    mousePositionCanvas = {
+  
+          x : event.clientX,
+          y : event.clientY
+  
+      };
+
+      canvas.style.left = (mousePositionCanvas.x + offsetCanvas[0]) + 'px';
+      canvas.style.top  = (mousePositionCanvas.y + offsetCanvas[1]) + 'px';
+  }
+}, true);
