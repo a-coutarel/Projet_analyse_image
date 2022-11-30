@@ -285,12 +285,12 @@ document.querySelector('#getFileSubstraction').addEventListener("change", () => 
 
 document.querySelector('.thinning-btninfo').addEventListener("click", () => {
   let img = document.getElementsByClassName("SE-details")[0];
-  if(img.style.display == 'none' || img.style.display == '') img.style.display = 'block';
-  else img.style.display = 'none';
+  if(img.style.display == 'none' || img.style.display == '') { img.style.display = 'block'; document.querySelector('.thinning-btninfo').innerText = "ⓧ"; }
+  else { img.style.display = 'none'; document.querySelector('.thinning-btninfo').innerText = "ⓘ"; }
 });
 
 document.querySelector('.thickening-btninfo').addEventListener("click", () => {
   let img = document.getElementsByClassName("SE-details")[1];
-  if(img.style.display == 'none' || img.style.display == '') img.style.display = 'block';
-  else img.style.display = 'none';
+  if(img.style.display == 'none' || img.style.display == '') { img.style.display = 'block'; document.querySelector('.thickening-btninfo').innerText = "ⓧ"; }
+  else { img.style.display = 'none'; document.querySelector('.thickening-btninfo').innerText = "ⓘ"; }
 });

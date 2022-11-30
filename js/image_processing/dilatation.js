@@ -11,7 +11,7 @@ export class Dilatation extends Generic {
      * Dilatation
      */
     processing() {
-        let size = prompt("Please enter the size of the structuring element :", "3");
+        let size = prompt("Please enter the size of the square structuring element :", "3");
 
         if (!(size == null || size == "") && !isNaN(size)) {
             
