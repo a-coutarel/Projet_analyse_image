@@ -1,3 +1,9 @@
+@font-face {
+    font-family: sfPro;
+    src: url(../utils/SFPRODISPLAYREGULAR.OTF);
+}
+
+
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
@@ -19,57 +25,32 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #000;
-    border-bottom: solid 0.2vw #fff;
+    background: linear-gradient(to right, #FDFBFB, #EBEDEE 70%);
 }
 
 .basis {
-    color: red;
+    color : #111;
+    font-family: sfPro,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
 }
 
 header > button {
-    background-color: #000;
-    color: #fff;
+    background-color: transparent;
+    color: #111;
     font-size: .8vw;
     padding: .1vw .2vw;
     margin-left: .8vw;
-    border: #000 0.15vw solid;
+    border: transparent 0.15vw solid;
     white-space: nowrap;
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: sfPro, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
-    transition: 0.5s border-bottom;
+    transition: 0.2s border-bottom;
 }
 
 header > button:hover {
-    border-bottom: 0.15vw solid #fff;
+    border-bottom: 0.15vw solid #111;
 }
-
-
-navButtons {
-    position: fixed;
-    z-index: 1000;
-    bottom: 1.5vw;
-    left: 1.5vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-navButtons > button {
-    background-color: #fff;
-    color: #111;
-    font-size: .8vw;
-    padding: .2vw .4vw;
-    border-radius: .25vw;
-    margin-bottom: .6vh;
-    border: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    cursor: pointer;
-    border: #000 solid .1vw;
-    box-shadow: rgba(0, 0, 0, 0.308) 0px 0px .3vw 0px;
-}
-
 
 .help {
     margin-left: 0;
@@ -90,80 +71,27 @@ navButtons > button {
 }
 
 
-#histo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+navButtons {
     position: fixed;
-    bottom: 1.5vw;
-    right: 1.5vw;
-    width: 25vw;
-    height: 25vh;
-    background-color: transparent;
-    border: #000 solid .1vw;
-    box-shadow: rgba(0, 0, 0, 0.308) 0px 0px .25vw 0px;
-    margin-bottom: .6vh;
-    visibility: hidden;
-    transition: background-color .1s linear;
-}
-
-#histogram {
     z-index: 1000;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .1s linear;
+    bottom: 1.5vw;
+    left: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-#close-histo {
-    position: absolute;
-    z-index: 1100;
-    right: 0;
-    top: 0;
-    width: 1.5vw;
-    height: 1vw;
-    color: #fff;
-    font-size: .7vw;
-    border: solid #000 .1vw;
-    background-color: rgb(134, 0, 0);
-    cursor: pointer;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .1s linear, background-color .08s linear;
-}
-
-#close-histo:hover {
-    background-color: rgb(201, 0, 0);
-}
-
-#show-histo {
-    background-color: #fff;
-    z-index: 1200;
+navButtons > button {
+    background: linear-gradient(to right, #FDFBFB, #EBEDEE 70%);
     color: #111;
     font-size: .8vw;
     padding: .2vw .4vw;
     border-radius: .25vw;
+    margin-bottom: .6vh;
     border: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: sfPro, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
-    border: #000 solid .1vw;
-    box-shadow: rgba(0, 0, 0, 0.308) 0px 0px .3vw 0px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    visibility: visible;
-    opacity: 1;
-    transition: opacity .1s linear;
-}
-
-#histo-alert {
-    position: absolute;
-    font-size: .8vw;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .1s linear;
-    text-align: center;
+    border: #111 solid .1vw;
 }
 
 
@@ -186,4 +114,80 @@ navButtons > button {
     transform: translate(-50%, -50%);
     transition: top .1s linear, left .1s linear, width .1s linear;
     visibility: hidden;
+}
+
+
+#histo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    position: fixed;
+    bottom: 1.5vw;
+    right: 1.5vw;
+    width: 25vw;
+    height: 25vh;
+    border: #000 solid .1vw;
+    margin-bottom: .6vh;
+    visibility: hidden;
+    transition: background .2s linear;
+    background: linear-gradient(to right, #FDFBFB, #EBEDEE 70%);
+}
+
+#histogram {
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s linear;
+}
+
+#close-histo {
+    position: absolute;
+    z-index: 1100;
+    right: 0;
+    top: 0;
+    width: 1.5vw;
+    height: 1vw;
+    color: #fff;
+    font-size: .7vw;
+    border: solid #111 .1vw;
+    background-color: rgb(134, 0, 0);
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s linear, background-color .08s linear;
+}
+
+#close-histo:hover {
+    background-color: rgb(201, 0, 0);
+}
+
+#show-histo {
+    background: linear-gradient(to right, #FDFBFB, #EBEDEE 70%);
+    z-index: 1200;
+    color: #111;
+    font-size: .8vw;
+    padding: .2vw .4vw;
+    border-radius: .25vw;
+    border: 0;
+    font-family: sfPro, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    border: #111 solid .1vw;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s linear;
+}
+
+#histo-alert {
+    position: absolute;
+    font-size: .8vw;
+    font-family: sfPro,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s linear;
+    text-align: center;
+    color: #111;
 }

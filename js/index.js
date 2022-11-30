@@ -383,7 +383,7 @@ document.querySelector('#show-histo').addEventListener("click", () => {
 
   document.querySelector('#show-histo').style.opacity = "0";
   document.querySelector('#close-histo').style.opacity = "1";
-  document.querySelector('#histo-container').style.backgroundColor = "#fff";
+  document.querySelector('#histo-container').style.background = "linear-gradient(to right, #FDFBFB, #EBEDEE 70%)";
 });
 
 
@@ -402,5 +402,5 @@ document.querySelector('#close-histo').addEventListener("click", () => {
 
   document.querySelector('#show-histo').style.opacity = "1";
   document.querySelector('#close-histo').style.opacity = "0";
-  document.querySelector('#histo-container').style.backgroundColor = "transparent";
+  document.querySelector('#histo-container').style.background = "transparent";
 });
