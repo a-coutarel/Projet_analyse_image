@@ -21,23 +21,9 @@ let imageObj;
 
 
 const histogram = document.getElementById('histogram');
-let dataImg = [];
-let X = [];
-for(let i = 0; i <= 255; i++) {
-    X[i] = i;
-    dataImg[i] = 0;
-}
 
 let chartHisto = new Chart(histogram, {
     type: 'bar',
-    data: {
-      labels: X,
-      datasets: [{
-        label: 'Histogram',
-        data: dataImg,
-        borderWidth: 1
-      }]
-    },
     options: {
       scales: {
         x: {
@@ -371,7 +357,7 @@ document.querySelector('.thickening-btninfo').addEventListener("click", () => {
  * Shows the histogram window
  */
 document.querySelector('#show-histo').addEventListener("click", () => {
-  if(imageObj instanceof ImageObj && imageObj.isGrayscale) {
+  if(imageObj instanceof ImageObj) {
     histogram.style.visibility = "visible";
     histogram.style.opacity = "1";
   }

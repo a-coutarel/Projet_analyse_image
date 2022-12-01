@@ -194,13 +194,15 @@ export class ImageObj {
      * Calculates the histogram and updates it
      */
     calcHisto() {
+        let X = [];
+
+        for(let i = 0; i <= 255; i++) { X[i] = i; }
+
         if(this.isGrayscale) {
 
-            let dataImg = [];
-
-            for(let i = 0; i <= 255; i++) {
-                dataImg[i] = 0;
-            }
+            let dataImg= [];
+  
+            for(let i = 0; i <= 255; i++) { dataImg[i] = 0; }
 
             for(let i = 0; i < this.imgHeight; i++) {
                 for(let j = 0; j < this.imgWidth; j++) {
@@ -208,25 +210,72 @@ export class ImageObj {
                 }
             }
 
-            this.chartHisto.data.datasets[0].data = dataImg;
-            if(document.getElementById('histo-container').style.visibility == "visible") {
-                document.getElementById('histogram').style.visibility = "visible";
-                document.getElementById('histogram').style.opacity = "1";
-                document.querySelector('#histo-alert').style.visibility = "hidden";
-                document.querySelector('#histo-alert').style.opacity = "0";
-            }
+            this.chartHisto.data = {
+                labels: X,
+                datasets: [{
+                  label: 'Histogram',
+                  data: dataImg,
+                  borderWidth: 1,
+                  backgroundColor: '#000000',
+                  borderColor: '#000000',
+                }]
+              }
+              
             this.chartHisto.options = { scales: { y: { max : Math.max(...dataImg) } }};
-            this.chartHisto.update();
             
         
         } else {
-            if(document.getElementById('histo-container').style.visibility == "visible") {
-                document.querySelector('#histo-alert').style.visibility = "visible";
-                document.querySelector('#histo-alert').style.opacity = "1";
-                document.getElementById('histogram').style.visibility = "hidden";
-                document.getElementById('histogram').style.opacity = "0";
+
+            let R = [];
+            let G = [];
+            let B = [];
+
+            for(let i = 0; i <= 255; i++) {
+                R[i] = 0;
+                G[i] = 0;
+                B[i] = 0;
             }
+
+            for(let i = 0; i < this.imgSize; i++) {
+                R[this.red[i]]++;
+                G[this.blue[i]]++;
+                B[this.green[i]]++;
+            }
+
+            this.chartHisto.data = {
+                labels: X,
+                datasets: [{
+                  label: 'Red',
+                  data: R,
+                  borderWidth: 1,
+                  backgroundColor: '#ff0000',
+                  borderColor: '#ff0000',
+                },
+                {
+                    label: 'Green',
+                    data: G,
+                    borderWidth: 1,
+                    backgroundColor: '#00ff2a',
+                    borderColor: '#00ff2a',
+                  },
+                  {
+                    label: 'Blue',
+                    data: B,
+                    borderWidth: 1,
+                    backgroundColor: '#0008ff',
+                    borderColor: '#0008ff',
+                  }]
+              }
         }
+
+        if(document.getElementById('histo-container').style.visibility == "visible") {
+            document.getElementById('histogram').style.visibility = "visible";
+            document.getElementById('histogram').style.opacity = "1";
+            document.querySelector('#histo-alert').style.visibility = "hidden";
+            document.querySelector('#histo-alert').style.opacity = "0";
+        }
+
+        this.chartHisto.update();
     }
 
 }
