@@ -23,6 +23,8 @@ export class Generic {
             this.image.prev_image = new ImageObj(this.image);
             this.processing();
             this.rgbUpdate();
+            this.image.isImageGrayscale(true);
+            this.image.isImageBinary(true);
             this.printModifiedImage();
         } else {
             alert("Please import a valid image.");
@@ -36,6 +38,8 @@ export class Generic {
                 this.image.prev_image = new ImageObj(this.image);
                 this.processing();
                 this.grayUpdate();
+                this.image.isImageGrayscale(true);
+                this.image.isImageBinary(true);
                 this.printModifiedImage();
             }
             else {
@@ -92,7 +96,7 @@ export class Generic {
                 this.image.green[i*this.image.imgWidth + j] = this.image.gray[i][j];
                 this.image.blue[i*this.image.imgWidth + j] = this.image.gray[i][j];
 
-                if(this.image.isBinary) this.image.bin[i][j] = this.image.gray[i][j]/255;
+                if(this.image.isBinary) { this.image.bin[i][j] = this.image.gray[i][j]/255; }
             }
         }
     }
@@ -103,19 +107,10 @@ export class Generic {
      * Useful when an RGB proccesing is operated on a grayscale image, in order to update the gray array attribute
      */
      rgbUpdate() {
-        if(this.image.isGrayscale) {
-            for(let i = 0; i < this.image.imgHeight; i++) {
-                for(let j = 0; j < this.image.imgWidth; j++) {
-                    this.image.gray[i][j] = this.image.red[i*this.image.imgWidth + j];
-                }
-            }
-        }
-
-        if(this.image.isBinary) {
-            for(let i = 0; i < this.image.imgHeight; i++) {
-                for(let j = 0; j < this.image.imgWidth; j++) {
-                    this.image.bin[i][j] = this.image.red[i*this.image.imgWidth + j]/255;
-                }
+        for(let i = 0; i < this.image.imgHeight; i++) {
+            for(let j = 0; j < this.image.imgWidth; j++) {
+                if(this.image.isGrayscale) { this.image.gray[i][j] = this.image.red[i*this.image.imgWidth + j]; }
+                if(this.image.isBinary) { this.image.bin[i][j] = this.image.red[i*this.image.imgWidth + j]/255; }
             }
         }
     }

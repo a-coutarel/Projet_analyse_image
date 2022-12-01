@@ -20,7 +20,7 @@ let canvas = document.getElementById('imageViewer');
 let imageObj;
 
 
-const histogram = document.getElementById('histogram');
+let histogram = document.getElementById('histogram');
 
 let chartHisto = new Chart(histogram, {
     type: 'bar',
