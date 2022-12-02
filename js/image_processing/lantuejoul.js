@@ -16,7 +16,7 @@ export class Lantuejoul extends Generic {
      */
     processing() {
 
-        let size = 3;
+        let n = 1;
         let X = new ImageObj(this.image);
 
         for(let i = 0; i < this.image.imgHeight; i++) {
@@ -25,16 +25,24 @@ export class Lantuejoul extends Generic {
             }
         }
 
+        let idempotence = false;
+        let prev_bin = JSON.parse(JSON.stringify(this.image.bin));
+
         do {
 
             let E = new ImageObj(X);
             let OE = new ImageObj(X);
             
-            this.doErosionTest(E, size);
+            for(let i = 0; i < n; i++) {
+                this.doErosionTest(E, 3)
+            }
+
+            for(let i = 0; i < n; i++) {
+                this.doErosionTest(OE, 3)
+            }
                 
-            this.doErosionTest(OE, size);
-            this.doErosionTest(OE, 3);
-            this.doDilatationTest(OE, 3);
+            this.doErosionTest(OE, 3)
+            this.doDilatationTest(OE, 3)
     
             for(let i = 0; i < this.image.imgHeight; i++) {
                 for(let j = 0; j < this.image.imgWidth; j++) {
@@ -48,9 +56,12 @@ export class Lantuejoul extends Generic {
                 }
             }
 
-            size +=2;
+            idempotence = this.idempotence(prev_bin);
+            if(!idempotence) prev_bin = JSON.parse(JSON.stringify(this.image.bin));
 
-        }while(size < 100);
+            n ++;
+
+        }while(!idempotence);
         
     }
 
