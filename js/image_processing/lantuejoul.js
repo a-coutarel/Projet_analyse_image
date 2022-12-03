@@ -18,6 +18,7 @@ export class Lantuejoul extends Generic {
 
         let n = 1;
         let X = new ImageObj(this.image);
+        let Ex, OEx;
 
         for(let i = 0; i < this.image.imgHeight; i++) {
             for(let j = 0; j < this.image.imgWidth; j++) {
@@ -30,29 +31,17 @@ export class Lantuejoul extends Generic {
 
         do {
 
-            let E = new ImageObj(X);
-            let OE = new ImageObj(X);
+            Ex = new ImageObj(X);
             
-            for(let i = 0; i < n; i++) {
-                this.doErosionTest(E, 3)
-            }
-
-            for(let i = 0; i < n; i++) {
-                this.doErosionTest(OE, 3)
-            }
+            for(let i = 0; i < n; i++) { new Erosion(Ex).doErosionCross(3); }
+            
+            OEx = new ImageObj(Ex);
                 
-            this.doErosionTest(OE, 3)
-            this.doDilatationTest(OE, 3)
-    
-            for(let i = 0; i < this.image.imgHeight; i++) {
-                for(let j = 0; j < this.image.imgWidth; j++) {
-                    if(E.bin[i][j] == 1) E.bin[i][j] -= OE.bin[i][j];
-                }
-            }
+            new Open(OEx).doOpeningCross(3);
 
             for(let i = 0; i < this.image.imgHeight; i++) {
                 for(let j = 0; j < this.image.imgWidth; j++) {
-                    if(this.image.bin[i][j] == 1 || E.bin[i][j] == 1) this.image.bin[i][j] = 1;
+                    if(this.image.bin[i][j] == 1 || Ex.bin[i][j] - OEx.bin[i][j] == 1) this.image.bin[i][j] = 1;
                 }
             }
 
@@ -63,40 +52,6 @@ export class Lantuejoul extends Generic {
 
         }while(!idempotence);
         
-    }
-
-    doDilatationTest(imgObj, size) {
-        let somme;
-        let bound = Math.floor(size / 2);
-        let bin_copy = JSON.parse(JSON.stringify(imgObj.bin));
-        for(let i = bound; i < imgObj.imgHeight-bound; i++) {
-            for(let j = bound; j < imgObj.imgWidth-bound; j++) {
-                somme = 0;
-                for(let k = -bound; k <= bound; k++) {
-                    for(let l = -bound; l <= bound; l++) {
-                        if(k == 0 || l == 0) somme += bin_copy[i+k][j+l];
-                    }
-                }
-                if(somme != 0) { imgObj.bin[i][j] = 1; }
-            }
-        }
-    }
-
-    doErosionTest(imgObj, size) {
-        let somme;
-        let bound = Math.floor(size / 2);
-        let bin_copy = JSON.parse(JSON.stringify(imgObj.bin));
-        for(let i = bound; i < imgObj.imgHeight-bound; i++) {
-            for(let j = bound; j < imgObj.imgWidth-bound; j++) {
-                somme = 0;
-                for(let k = -bound; k <= bound; k++) {
-                    for(let l = -bound; l <= bound; l++) {
-                        if(k == 0 || l == 0) somme += bin_copy[i+k][j+l];
-                    }
-                }
-                if(somme != (size*2-1)) { imgObj.bin[i][j] = 0; }
-            }
-        }
     }
     
 }

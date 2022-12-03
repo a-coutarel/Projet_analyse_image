@@ -40,5 +40,22 @@ export class Erosion extends Generic {
             }
         }
     }
+
+    doErosionCross(size) {
+        let somme;
+        let bound = Math.floor(size / 2);
+        let bin_copy = JSON.parse(JSON.stringify(this.image.bin));
+        for(let i = bound; i < this.image.imgHeight-bound; i++) {
+            for(let j = bound; j < this.image.imgWidth-bound; j++) {
+                somme = 0;
+                for(let k = -bound; k <= bound; k++) {
+                    for(let l = -bound; l <= bound; l++) {
+                        if(k == 0 || l == 0) somme += bin_copy[i+k][j+l];
+                    }
+                }
+                if(somme != (size*2-1)) { this.image.bin[i][j] = 0; }
+            }
+        }
+    }
     
 }

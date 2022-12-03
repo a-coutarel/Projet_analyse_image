@@ -12,7 +12,7 @@ export class Substraction extends Generic {
     
 
     /**
-     * Addition
+     * Substraction
      */
     processing() {
         if(this.second_img.imgWidth == this.image.imgWidth && this.second_img.imgHeight == this.image.imgHeight) {
