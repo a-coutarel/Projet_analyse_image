@@ -41,7 +41,7 @@ export class Erosion extends Generic {
         }
     }
 
-    doErosionCross(size) {
+    doErosion4C(size) {
         let somme;
         let bound = Math.floor(size / 2);
         let bin_copy = JSON.parse(JSON.stringify(this.image.bin));

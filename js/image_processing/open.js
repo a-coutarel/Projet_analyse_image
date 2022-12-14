@@ -31,9 +31,9 @@ export class Open extends Generic {
         new Dilatation(this.image).doDilatation(size);
     }
 
-    doOpeningCross(size) {
-        new Erosion(this.image).doErosionCross(size);
-        new Dilatation(this.image).doDilatationCross(size);
+    doOpening4C(size) {
+        new Erosion(this.image).doErosion4C(size);
+        new Dilatation(this.image).doDilatation4C(size);
     }
     
 }
