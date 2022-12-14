@@ -44,12 +44,6 @@ export class Lantuejoul extends Generic {
                 }
             }
 
-            for(let i = 0; i < this.image.imgHeight; i++) {
-                for(let j = 0; j < this.image.imgWidth; j++) {
-                    if(this.image.bin[i][j] == 1 || Ex.bin[i][j] - OEx.bin[i][j] == 1) this.image.bin[i][j] = 1;
-                }
-            }
-
             idempotence = this.idempotence(prev_bin);
 
             if(!idempotence) prev_bin = JSON.parse(JSON.stringify(this.image.bin));
