@@ -143,7 +143,7 @@ export class Generic {
 
         for(let i = 0; i < this.image.imgHeight; i++) {
             for(let j = 0; j < this.image.imgWidth; j++) {
-                if(prev_bin[i][j] != this.image.bin[i][j]) {flag = false;}
+                if(prev_bin[i][j] != this.image.bin[i][j]) {flag = false; break;}
             }
         }
 
