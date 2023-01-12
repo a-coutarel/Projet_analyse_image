@@ -22,9 +22,8 @@ export class Generic {
         if(this.image instanceof ImageObj) {
             this.image.prev_image = new ImageObj(this.image);
             this.processing();
-            this.rgbUpdate();
-            this.image.isImageGrayscale(true);
-            this.image.isImageBinary(true);
+            this.image.isImageGrayscale();
+            this.image.isImageBinary();
             this.printModifiedImage();
         } else {
             alert("Please import a valid image.");
@@ -37,9 +36,8 @@ export class Generic {
             if(this.image.isGrayscale) {
                 this.image.prev_image = new ImageObj(this.image);
                 this.processing();
+                this.image.isImageBinary();
                 this.grayUpdate();
-                this.image.isImageGrayscale(true);
-                this.image.isImageBinary(true);
                 this.printModifiedImage();
             }
             else {
@@ -95,22 +93,6 @@ export class Generic {
                 this.image.red[i*this.image.imgWidth + j] = this.image.gray[i][j];
                 this.image.green[i*this.image.imgWidth + j] = this.image.gray[i][j];
                 this.image.blue[i*this.image.imgWidth + j] = this.image.gray[i][j];
-
-                if(this.image.isBinary) { this.image.bin[i][j] = this.image.gray[i][j]/255; }
-            }
-        }
-    }
-    
-
-    /**
-     * Converts the data of red, green and blue 1D array attributes in the gray 2D array attribute and bin attribute
-     * Useful when an RGB proccesing is operated on a grayscale image, in order to update the gray array attribute
-     */
-     rgbUpdate() {
-        for(let i = 0; i < this.image.imgHeight; i++) {
-            for(let j = 0; j < this.image.imgWidth; j++) {
-                if(this.image.isGrayscale) { this.image.gray[i][j] = this.image.red[i*this.image.imgWidth + j]; }
-                if(this.image.isBinary) { this.image.bin[i][j] = this.image.red[i*this.image.imgWidth + j]/255; }
             }
         }
     }

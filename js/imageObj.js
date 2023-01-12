@@ -99,13 +99,11 @@ export class ImageObj {
     /**
      * Checks if the image is grayscale when it's imported. If yes, gets the datas of the image in the gray attribute (array) and sets isGrayscale to true
      */
-     isImageGrayscale(checkIteration) {
+     isImageGrayscale() {
         let flag = true;
         for(let i = 0; i < this.imgSize; i++) {
             if( !(this.red[i] == this.green[i] && this.green[i] == this.blue[i]) ) { flag = false; break;}
         }
-
-        if(checkIteration) { this.isGrayscale = flag; return; }
 
         if(flag) { 
             let grayArray = []
@@ -130,14 +128,14 @@ export class ImageObj {
 
             this.isGrayscale = true;
          }
-         else { this.isGrayscale = false; }
+         else { this.isGrayscale = false; this.gray = []; this.bin = []; }
     }
 
 
     /**
      * Checks if the image is binary when it's imported. If yes, gets the datas of the image in the bin attribute (array) and sets isBinary to true
      */
-     isImageBinary(checkIteration) {
+     isImageBinary() {
         if(this.isGrayscale) {
 
             let flag = true;
@@ -149,8 +147,6 @@ export class ImageObj {
                     }
                 }
             }
-
-            if(checkIteration) { this.isBinary = flag; return; }
             
             if(flag) { 
                 this.bin = JSON.parse(JSON.stringify(this.gray));
@@ -163,9 +159,9 @@ export class ImageObj {
 
                 this.isBinary = true;
              }
-             else { this.isBinary = false; }
+             else { this.isBinary = false; this.bin = []; }
         
-        } else { this.isBinary = false; }
+        } else { this.isBinary = false; this.gray = []; this.bin = []; }
     }
 
 
