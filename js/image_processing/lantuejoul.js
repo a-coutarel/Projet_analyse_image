@@ -30,7 +30,7 @@ export class Lantuejoul extends Generic {
         do {
 
             if(n > 0) {
-                new Erosion(Ex).doErosion4C(3);  
+                new Erosion(Ex).doErosion4C(3);
 
                 stop = true;
 
