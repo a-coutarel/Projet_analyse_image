@@ -1,4 +1,4 @@
-import { ImageObj } from "./ImageObj.js";
+import { ImageObj } from "./imageobj.js";
 import { Invert } from "./image_processing/invert.js";
 import { Grayscale } from "./image_processing/grayscale.js";
 import { Erosion } from "./image_processing/erosion.js";
