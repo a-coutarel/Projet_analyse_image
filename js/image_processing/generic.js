@@ -1,4 +1,4 @@
-import { ImageObj } from "../imageobj.js";
+import { ImageObj } from "../imageObj.js";
 
 export class Generic {
     

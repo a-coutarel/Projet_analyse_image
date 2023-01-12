@@ -1,4 +1,4 @@
-import { ImageObj } from "../imageobj.js";
+import { ImageObj } from "../imageObj.js";
 import { Erosion } from "./erosion.js";
 import { Generic } from "./generic.js";
 import { Open } from "./open.js";
